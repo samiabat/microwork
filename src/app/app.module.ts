@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,6 +16,19 @@ import { ReviewComponent } from './review/review.component';
 import { ShowMessageComponent } from './show-message/show-message.component';
 import { MessageComponent } from './message/message.component';
 import { CustomerComponent } from './customer/customer.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSortModule} from '@angular/material/sort';
+import {MatCommonModule} from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { SharedService } from './shared.service';
+import { IntercepterService } from './intercepter.service';
+
 
 @NgModule({
   declarations: [
@@ -34,9 +48,25 @@ import { CustomerComponent } from './customer/customer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatCommonModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [
+    SharedService,  {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IntercepterService,
+      multi: true
+     }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
