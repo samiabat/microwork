@@ -33,6 +33,7 @@ import { AddEditProposalComponent } from './proposal/add-edit-proposal/add-edit-
 import { ShowJobComponent } from './job/show-job/show-job.component';
 import { ShowProposalComponent } from './proposal/show-proposal/show-proposal.component';
 import { ShowCustomerComponent } from './customer/show-customer/show-customer.component';
+import { AddEditCustomerComponent } from './customer/add-edit-customer/add-edit-customer.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ShowCustomerComponent } from './customer/show-customer/show-customer.co
     AddEditProposalComponent,
     ShowJobComponent,
     ShowProposalComponent,
-    ShowCustomerComponent
+    ShowCustomerComponent,
+    AddEditCustomerComponent
   ],
   imports: [
     BrowserModule,
