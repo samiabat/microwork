@@ -28,6 +28,11 @@ import {MatCommonModule} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { SharedService } from './shared.service';
 import { IntercepterService } from './intercepter.service';
+import { AddEditJobComponent } from './job/add-edit-job/add-edit-job.component';
+import { AddEditProposalComponent } from './proposal/add-edit-proposal/add-edit-proposal.component';
+import { ShowJobComponent } from './job/show-job/show-job.component';
+import { ShowProposalComponent } from './proposal/show-proposal/show-proposal.component';
+import { ShowCustomerComponent } from './customer/show-customer/show-customer.component';
 
 
 @NgModule({
@@ -44,7 +49,12 @@ import { IntercepterService } from './intercepter.service';
     ReviewComponent,
     ShowMessageComponent,
     MessageComponent,
-    CustomerComponent
+    CustomerComponent,
+    AddEditJobComponent,
+    AddEditProposalComponent,
+    ShowJobComponent,
+    ShowProposalComponent,
+    ShowCustomerComponent
   ],
   imports: [
     BrowserModule,
