@@ -1,25 +1,21 @@
-h5{
-    display: inline;
-  }
-  i{
-    text-align: right;
-    align-items: center;
-    font-style: normal;
-    margin-left: 35em;
-  }
-  fieldset{
-    background-color: rgb(255, 255, 255);
-    border-radius:10px;
-    font-size:small;
-    font-family:fantasy;
-    margin-left:20px;
-  
-  }
-  p h1{
-    display: inline;
-  }
-  
-  .card{
-    margin-left: 0px;
-    }
-  
+.job-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: var(--surface);
+}
+
+.job-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.lh-relaxed {
+  line-height: 1.6;
+}
+
+.empty-state {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}

@@ -1,62 +1,95 @@
 <app-nav></app-nav>
-<div class="container-fluid">
-<div class="row">
-	<div class="col-md-9">
-		<h5 class="btn btn-sm btn-info align-content-center">JOBS</h5>
+<div class="page-wrapper">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Main Content -->
+      <div class="col-lg-8">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h4 class="fw-bold mb-1" style="color: var(--text-primary);">Browse Jobs</h4>
+            <p class="text-muted small mb-0">Find the right opportunity for you</p>
+          </div>
+          <a routerLink="/createJob" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>Post Job
+          </a>
+        </div>
 
-		<hr>
-		<div class="card card-body">
-			<a class="btn btn-sm btn-primary align-content-center" routerLink="/createJob">Post Job</a>
-      <form class="form-inline">
-        <input name="name_filter" [(ngModel)]="jobFilter" (keyup)="filterJob()" class="form-control mr-sm-2" type="search" placeholder="Search Jobs" aria-label="Search">
-      </form>
-      <table class="table table-striped">
+        <!-- Search -->
+        <div class="mb-4">
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+            <input
+              name="name_filter"
+              [(ngModel)]="jobFilter"
+              (keyup)="filterJob()"
+              class="form-control border-start-0"
+              type="search"
+              placeholder="Search jobs by title..."
+            />
+          </div>
+        </div>
 
-        <thead>
-          <th></th>
-        </thead>
-        <tbody>
-          <br>
-          <tr *ngFor="let job of jobDeta" id="jobTitle">
-            <div class="card-body" style="background-color: rgb(98, 167, 80);">
-            <h3 class="card-header my-0 p-sm-right job-tile-title" style="float:left !important; color: rgb(255, 255, 255)">{{job.title}}</h3>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button *ngIf="[job.customer]==user" (click)="setId(job)" routerLink="/proposals" class="btn btn-secondary" type="button">Proposals</button>
-              <button *ngIf="[job.customer]==user" (click)="setId(job)" routerLink="/createJob" class="btn btn-primary" type="button">Update</button>
-              <button *ngIf="[job.customer]==user" (click)="deleteJob(job.id)" class="btn btn-danger" type="button">Delete</button>
-            </div>
-            <hr>
-              <div class="card card-body color-red">
-                {{job.description}}
-                <hr>
-                <pre>
-                you will paid ${{ job.salary }} Education level: {{job.status}}
-                posted by {{ job.customer }} Date {{ job.date_created }}.
-              </pre>
-                  <hr>
+        <!-- Job Cards -->
+        <div class="job-list">
+          <div *ngFor="let job of jobDeta" class="job-card card mb-3 p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="flex-grow-1">
+                <h5 class="fw-semibold mb-1" style="color: var(--text-primary);">{{job.title}}</h5>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <span class="badge rounded-pill" style="background: var(--primary-light); color: var(--primary); font-size: 0.75rem;">
+                    <i class="bi bi-person me-1"></i>{{job.status | titlecase}}
+                  </span>
+                  <span class="badge rounded-pill bg-success-subtle text-success" style="font-size: 0.75rem;">
+                    <i class="bi bi-currency-dollar me-1"></i>{{job.salary}}
+                  </span>
+                </div>
               </div>
-              <div *ngIf="[job.customer]!=user" class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-danger" (click)="setId(job)" routerLink="/report" type="button">Report</button>
-                <button class="btn btn-primary" (click)="setId(job)" type="button" routerLink="/createProposal">Submit Proposal</button>
+              <div *ngIf="[job.customer]==user" class="d-flex gap-2 ms-3">
+                <button (click)="setId(job)" routerLink="/proposals" class="btn btn-sm btn-outline-primary" title="View Proposals">
+                  <i class="bi bi-people"></i>
+                </button>
+                <button (click)="setId(job)" routerLink="/createJob" class="btn btn-sm btn-outline-secondary" title="Edit Job">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button (click)="deleteJob(job.id)" class="btn btn-sm btn-outline-danger" title="Delete Job">
+                  <i class="bi bi-trash"></i>
+                </button>
               </div>
             </div>
-            <hr>
-          </tr>
-        </tbody>
-      </table>
 
-		</div>
-	</div>
+            <p class="text-muted small mb-3 lh-relaxed">{{job.description}}</p>
 
-  <div class="col-md-3">
-		<app-dashboard></app-dashboard>
-	</div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="text-muted small">
+                <i class="bi bi-person-circle me-1"></i>Posted by <strong>{{job.customer}}</strong>
+              </span>
+              <div *ngIf="[job.customer]!=user" class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-danger" (click)="setId(job)" routerLink="/report">
+                  <i class="bi bi-flag me-1"></i>Report
+                </button>
+                <button class="btn btn-sm btn-primary" (click)="setId(job)" routerLink="/createProposal">
+                  <i class="bi bi-send me-1"></i>Apply Now
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="jobDeta?.length === 0" class="empty-state text-center py-5">
+            <i class="bi bi-briefcase text-muted" style="font-size: 3rem;"></i>
+            <h5 class="mt-3 text-muted">No jobs found</h5>
+            <p class="text-muted small">Try adjusting your search or post a new job.</p>
+            <a routerLink="/createJob" class="btn btn-primary mt-2">
+              <i class="bi bi-plus me-2"></i>Post a Job
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <app-dashboard></app-dashboard>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-
-
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
 <app-footer></app-footer>
