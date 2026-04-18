@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SharedService {
 
-  readonly ApiUrl  = "https://microworks.onrender.com";
+  readonly ApiUrl = 'https://microworks.onrender.com';
 
   constructor(private http:HttpClient) {}
 

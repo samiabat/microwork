@@ -1,20 +1,16 @@
-.hello-msg{
-    font-size: 18px;
-    color: #fff;
-    margin-right: 20px;
-  }
-  
-  
-  
-  .profile-pic{
-    max-width: 30px;
-    max-height:30px;
-    margin: 0 auto;
-    border-radius: 50%;
-  }
-  li a, span a,.hello-msg {
-    font-size:0.8rem;
-    color: #fff;
-    text-decoration: none;
-  }
-  
+.navbar {
+  min-height: 64px;
+}
+.navbar-brand {
+  font-size: 1.3rem !important;
+  letter-spacing: -0.5px;
+}
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+  opacity: 1;
+}
